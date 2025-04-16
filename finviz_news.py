@@ -16,6 +16,9 @@ import openai
 import os
 from openai import OpenAI
 
+# Define main file path (optional, for reference or logging)
+MAIN_FILE_PATH = "streamlit_app.py"
+
 # Fetch latest stock news and save to CSV
 def fetch_stock_news():
     URL = "https://elite.finviz.com/news_export.ashx?v=3&auth=2ab1c101-1f70-4086-b4bd-37d237a73406"
@@ -23,7 +26,7 @@ def fetch_stock_news():
     if response.status_code == 200:
         with open("export.csv", "wb") as file:
             file.write(response.content)
-        return "✅ News data successfully saved to export.csv"
+        return f"✅ News data saved by {MAIN_FILE_PATH}"
     else:
         return "❌ Failed to fetch news data."
 
@@ -55,7 +58,7 @@ def process_news_data(api_key):
                 recommendations.append((title, stock, recommendation))
         return recommendations
     except FileNotFoundError:
-        st.error("⚠️ export.csv not found. Please fetch stock news first.")
+        st.error(f"⚠️ export.csv not found. Use the fetch button in {MAIN_FILE_PATH} first.")
         return []
 
 # ---------------------- Streamlit UI ----------------------
@@ -84,3 +87,4 @@ if api_key:
                             st.markdown(f"**Recommendation:**\n{recommendation}")
 else:
     st.warning("🔐 Please enter your OpenAI API key to proceed.")
+
