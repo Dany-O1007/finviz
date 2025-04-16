@@ -21,7 +21,7 @@ MAIN_FILE_PATH = "streamlit_app.py"
 
 # Fetch latest stock news and save to CSV
 def fetch_stock_news():
-    URL = "https://elite.finviz.com/news_export.ashx?v=3&auth=2ab1c101-1f70-4086-b4bd-37d237a73406"
+    URL = "https://elite.finviz.com/news_export.ashx?v=3&auth=1f9c8de8-a39e-45c4-9c3d-1f60fa19fe26"
     response = requests.get(URL)
     if response.status_code == 200:
         with open("export.csv", "wb") as file:
